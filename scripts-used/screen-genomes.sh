@@ -28,7 +28,7 @@ do
 	search-fasta.py -i $fas -m $genome'_temp.txt' -o $genome.temp.fasta
 
 	# remove contigs with less than 500bp and less than 55% GC%
-	removesmalls.py -i $genome.temp.fasta -l 2000 -o $genome.fix.fasta > /dev/null 2>&1
+	removesmalls.py -i $genome.temp.fasta -l 2000 -g 55 -o $genome.fix.fasta > /dev/null 2>&1
 
 	print-fasta-id.py $genome.fix.fasta
 
