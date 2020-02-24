@@ -1,4 +1,4 @@
-# sal_genomecomp
+# Genome assembly comparison for a high %GC bacterium
 comparing different genome assembly platforms for Salinispora
 
 ## TL;DR ##
@@ -75,6 +75,34 @@ spades.py -k 31,41,51,61,71,81 --careful -t $THREAD \
 -1 $REF.R1.clean.fq.gz -2 $REF.R2.clean.fq.gz \
 -o $OUTDIR
 ```
+
+## Downstream analysis ##
+Since SPAdes looked pretty good, we can also check how the assembly looked by getting coverage information and taxonomic information on the assembled contigs
+```
+ASSEMBLY=scaffolds.fasta
+
+blastn -task megablast -query $ASSEMBLY -db $BLASTDB/nt -evalue 1e-5 -max_target_seqs 1 \
+-num_threads $THREAD -outfmt '6 qseqid staxids' -out $REF.nt.1e-5.megablast
+
+bowtie2-build $ASSEMBLY $ASSEMBLY
+
+bowtie2 -x $ASSEMBLY --very-fast-local -k 1 -t -p $THREAD --reorder --mm \
+-U <($BIN/shuffleSequences_fastx.pl 4 <(zcat $READBASE/$REF.R1.clean.fq.gz) <(zcat $READBASE/$REF.R2.clean.fq.gz)) \
+| samtools view -S -b -T $ASSEMBLY - > $REF.bowtie2.bam
+
+$BIN/gc_cov_annotate.pl \
+--blasttaxid $REF.nt.1e-5.megablast \
+--assembly $ASSEMBLY --bam *.bam --out $REF.bowtie.blobplot.txt \
+--taxdump $TAXDUMP --taxlist genus family phylum
+```
+This will output a nice [taxon-annotated GC-coverage plots (a.k.a blob plots)](https://github.com/sujaikumar/assemblage/blob/master/README.md) like this one:
+
+<p align="center">
+  <img src="assembler-output/CNZ-902.bowtie.blobplot.txt.taxlevel_genus.png" width="350" title="Results">
+</p>
+
+I also like to filter by other metrics, coverage and %GC since we have such a unique GC signature in these organisms. This can be accomplished [here](scripts-used/screen-genomes.sh). It will remake some blobplots with the newer parameters.
+
 
 # Velvet
 again, there is a built-in part here for QC filtering, just need rawdata.
