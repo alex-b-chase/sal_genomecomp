@@ -12,7 +12,7 @@ do
 	genome=$(echo $fas | cut -f1 -d'.')
 	method=$(echo $fas | cut -f2 -d'.')
 
-	# remove contigs with less than 500bp and less than 55% GC%
+	# remove contigs with less than 500bp across all assembled genomes
 	removesmalls.py -i $fas -l 500 -o $genome.$method.fix.fasta > /dev/null 2>&1
 
 	# calculate some genomic stats
