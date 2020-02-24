@@ -2,7 +2,10 @@
 comparing different genome assembly platforms for Salinispora
 
 ## TL;DR ##
-![Results](assembler-output/genome-assemblers.pdf)
+<p align="center">
+  <img src="assembler-output/genome-assemblers.pdf" width="350" title="Results">
+</p>
+
 
 # Overview
 data from a MiSeq run on 16 genomes isolated from a 1x1m plot
