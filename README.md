@@ -6,9 +6,11 @@ comparing different genome assembly platforms for Salinispora
   <img src="assembler-output/genome-assemblers.png" width="350" title="Results">
 </p>
 
-All assembler recapitulated roughly the same genome size. I added in a complete, reference genome from *S. arenicola* or size comparisons with SACNS205. I also included the average +/- standard deviation of all previously sequenced *S. arenicola* genomes (N=61) in red.
+All assembler recapitulated roughly the same genome size. I added in a complete, reference genome from *S. arenicola* for size comparisons with SACNS205. I also included the average +/- standard deviation of all previously sequenced *S. arenicola* genomes (N=61) in red.
 
 When we look at other assembly metrics like n50 and total contig number, we see separation. In particular, the RAY assembler fragmented the genomes a lot more than other assemblers. SPAdes and a5 seemed to have the best results with this dataset.
+
+However, Velvet and ABySS had pretty decent results as well AND took way less computational resources to finish assemblies. There's always a trade-off!
 
 # Overview
 data from a MiSeq run on 16 genomes isolated from a 1x1m plot
