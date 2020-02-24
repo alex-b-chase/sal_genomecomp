@@ -6,7 +6,7 @@ cd $BASE
 
 
 # curate the genomes by filtering and renaming to finalize genomes
-# first need to rename the contig IDs since prokka doesn't like long names <20 characters
+# from the output of genome assemblers, I named the genomes by strainID.assembler.fasta
 for fas in *.fasta
 do
 	genome=$(echo $fas | cut -f1 -d'.')
@@ -31,5 +31,7 @@ rm -rf $BASE/total.genome.stats.txt
 cat *_n50.txt | awk '!seen[$0]++' > $BASE/total.genome.stats.txt
 rm *_n50.txt
 
-ani-aai-matrix.sh -m ani -i .fix.fasta -t 8
+### OPTIONAL
+# can run a pairwise ANI to see if any assemblers are totally off - would guess not, so didn't run
+#ani-aai-matrix.sh -m ani -i .fix.fasta -t 8
 
