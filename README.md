@@ -1,6 +1,9 @@
 # sal_genomecomp
 comparing different genome assembly platforms for Salinispora
 
+## TL;DR ##
+![Results](assembler-output/genome-assemblers.pdf)
+
 # Overview
 data from a MiSeq run on 16 genomes isolated from a 1x1m plot
 
