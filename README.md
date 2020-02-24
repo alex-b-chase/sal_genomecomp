@@ -3,7 +3,7 @@ comparing different genome assembly platforms for Salinispora
 
 ## TL;DR ##
 <p align="center">
-  <img src="assembler-output/genome-assemblers.pdf" width="350" title="Results">
+  <img src="assembler-output/genome-assemblers.png" width="350" title="Results">
 </p>
 
 
